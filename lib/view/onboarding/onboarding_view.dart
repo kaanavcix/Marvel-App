@@ -8,6 +8,8 @@ import 'package:marvelapp/future/init/extension/text_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marvelapp/view/onboarding/cubit/onboarding_cubit.dart';
 
+import 'widgets/dot_indicator.dart';
+
 class OnbordingPage extends StatelessWidget {
   const OnbordingPage({super.key});
 
@@ -42,6 +44,8 @@ class OnboardingView extends StatelessWidget {
         builder: (context, state) {
           var index = state.selectedIndex;
 
+          const edgeInsets = EdgeInsets.symmetric(horizontal: 15);
+          const edgeInsets2 = EdgeInsets.only(bottom: 8);
           return Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -88,12 +92,12 @@ class OnboardingView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      dotIndicator(context, index == 0),
-                      dotIndicator(context, index == 1),
-                      dotIndicator(context, index == 2),
-                      dotIndicator(context, index == 3),
-                      dotIndicator(context, index == 4),
-                      dotIndicator(context, index == 5),
+                      DotIndicator(selectedIndex: index == 0),
+                      DotIndicator(selectedIndex: index == 1),
+                      DotIndicator(selectedIndex: index == 2),
+                      DotIndicator(selectedIndex: index == 3),
+                      DotIndicator(selectedIndex: index == 4),
+                      DotIndicator(selectedIndex: index == 5),
                     ],
                   )),
               Positioned(
@@ -119,18 +123,21 @@ class OnboardingView extends StatelessWidget {
                             height: 50,
                             width: context.getWidth(),
                             color: context.getPrimaryColor(),
-                            margin: EdgeInsets.symmetric(horizontal: 15) +
-                                EdgeInsets.only(bottom: 8),
-                            child: Center(
-                                child: Text(
-                              "Sign up",
-                              style: context
-                                  .getTextTheme()
-                                  .titleMedium!
-                                  .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
-                            )),
+                            margin: edgeInsets + edgeInsets2,
+                            child: GestureDetector(
+                              onTap: () =>
+                                  context.router.pushNamed("/register"),
+                              child: Center(
+                                  child: Text(
+                                "Sign up",
+                                style: context
+                                    .getTextTheme()
+                                    .titleMedium!
+                                    .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                              )),
+                            ),
                           ),
                           GestureDetector(
                             onTap: () => context.router.pushNamed("/login"),
@@ -141,7 +148,7 @@ class OnboardingView extends StatelessWidget {
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 1, color: Colors.white)),
-                              margin: EdgeInsets.symmetric(horizontal: 15),
+                              margin: edgeInsets,
                               child: Center(
                                   child: Text(
                                 "Log in",
@@ -188,19 +195,6 @@ class OnboardingView extends StatelessWidget {
             ],
           );
         },
-      ),
-    );
-  }
-
-  Container dotIndicator(BuildContext context, bool selectedIndex) {
-    return Container(
-      constraints: BoxConstraints(maxHeight: 10, maxWidth: 10),
-      height: 10,
-      width: 10,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: selectedIndex ? context.getPrimaryColor() : Colors.white,
-        // border: Border.all(width: 1,color: selectedIndex?Colors.transparent:Colors.white,)
       ),
     );
   }

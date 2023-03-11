@@ -45,7 +45,7 @@ class HomeView extends StatelessWidget {
               circleBorder(context, 61, 0.6),
               circleBorder(context, 59, 0.8),
               circleBorder(context, 56, 1),
-              CircleAvatar(
+              const CircleAvatar(
                 foregroundImage: AssetImage("assets/images/ellipse15.png"),
                 radius: 26.5,
                 backgroundColor: Colors.black,

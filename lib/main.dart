@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marvelapp/future/init/theme/dark_theme.dart';
 import 'package:marvelapp/view/main/cubit/main_cubit.dart';
+import 'package:marvelapp/view/onboarding/cubit/login_cubit.dart';
 import 'package:marvelapp/view/onboarding/cubit/onboarding_cubit.dart';
+import 'package:marvelapp/view/onboarding/cubit/register_cubit.dart';
 import 'package:marvelapp/view/onboarding/login_view.dart';
 import 'package:marvelapp/view/onboarding/onboarding_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,16 +19,25 @@ class MarvelApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OnboardingCubit(PageController()),
-      child: MaterialApp.router(
-        routerDelegate: _appRouter.delegate(),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        darkTheme: darkTheme,
-        title: "Marvel",
-        themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => OnboardingCubit(PageController()),
+        ),
+        BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(create: (context) => RegisterCubit(),
+        lazy: true,)
+      ],
+      child:  MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      darkTheme: darkTheme,
+      title: "Marvel",
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+    ),
     );
   }
 }

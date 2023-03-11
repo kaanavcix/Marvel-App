@@ -1,6 +1,15 @@
-# marvelapp
+# Marvel App
 
-A new Flutter project.
+## Introduction
+
+Hello friends, I decided to have to enough time for developing new apps. That's why I found a design and marvel api source. Actually, I am so bored from using a getx state managment and ı want to try new technologies and state managements. I prefer to use Flutter bloc and Freezed package.
+
+
+ * Design
+
+ [Marvel Community Design UI Kit](https://www.figma.com/file/QTDbYcg9uG1rehgrc0ctAy/MARVEL--Streaming-App-(Community)?node-id=1%3A2&t=7jWci8TTVtdhIHlD-1)
+
+
 
 ## Getting Started
 

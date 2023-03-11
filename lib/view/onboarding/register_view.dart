@@ -8,12 +8,14 @@ import 'package:marvelapp/future/init/extension/text_extension.dart';
 import 'package:marvelapp/view/home/view/home_view.dart';
 import 'package:marvelapp/view/main/view/main_view.dart';
 import 'package:marvelapp/view/onboarding/cubit/login_cubit.dart';
+import 'package:marvelapp/view/onboarding/cubit/register_cubit.dart';
 import 'package:marvelapp/view/onboarding/widgets/input_widget.dart';
 
+import 'widgets/marvel_button.dart';
+import 'widgets/row_button.dart';
 
-
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +23,17 @@ class LoginView extends StatelessWidget {
     var passwordController = context.read<LoginCubit>().passwordController;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: BlocConsumer<LoginCubit, LoginState>(
+      body: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state.state == LoginStateEnum.completed) {
+          if (state.state == RegisterEnum.completed) {
             // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainView(),),(route) => false,);
-
             context.router.replaceNamed("/main");
           }
-
-          
         },
         builder: (context, state) {
+          const edgeInsets = EdgeInsets.symmetric(vertical: 8.0);
+          const edgeInsets2 = EdgeInsets.only(top: 20);
+          const edgeInsets3 = EdgeInsets.symmetric(horizontal: 20.0);
           return Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -49,45 +51,31 @@ class LoginView extends StatelessWidget {
                 ),
                 //Placeholder(fallbackHeight: 90,fallbackWidth: 90,),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0) +
-                      EdgeInsets.only(top: 20),
+                  padding: edgeInsets + edgeInsets2,
                   child: InputWidget(
                     textEditingController: emailController,
                     hintText: "Enter your Email ID",
                   ),
                 ),
                 Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: edgeInsets,
                     child: InputWidget(
                       textEditingController: passwordController,
                       hintText: "Password",
-                      suffixText: state.isVisible ?? false ? "Side" : "Show",
-                      isVisible: state.isVisible,
-                      onTap: () => context.read<LoginCubit>().changeVisible(),
+                      suffixText: (state.isShow) ?? false ? "Side" : "Show",
+                      isVisible: state.isShow,
+                      onTap: () =>
+                          context.read<RegisterCubit>().changeVisiblity(),
                     )),
+                MarvelButton(
+                  state,
+                    text: "Signup",
+                    onTap: () {
+                      context.read<RegisterCubit>().registerControl();
+                      context.router.pushNamed("/payment");
+                    }),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: GestureDetector(
-                    onTap: () => context.read<LoginCubit>().loginControl(),
-                    child: Container(
-                      height: 50,
-                      width: context.getWidth(),
-                      decoration: BoxDecoration(
-                          color: context.getPrimaryColor(),
-                          border: Border.all(
-                              width: 3, color: context.getPrimaryColor())),
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Center(
-                          child: Text(
-                        "Log in",
-                        style: context.getTextTheme().titleMedium!.copyWith(
-                            fontWeight: FontWeight.bold, fontSize: 18),
-                      )),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  padding: edgeInsets3,
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
@@ -99,7 +87,7 @@ class LoginView extends StatelessWidget {
                       )),
                 ),
 
-                SizedBox(
+              const   SizedBox(
                   height: 20,
                 ),
                 Align(
@@ -131,9 +119,9 @@ class LoginView extends StatelessWidget {
                     //mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                    children: [
-                      rowButton(context, "google", "Google"),
-                      rowButton(context, "facebook", "Facebook"),
+                    children: const [
+                      RowButton(path: "google", title: "Google"),
+                      RowButton(path: "facebook", title: "Facebook"),
                     ],
                   ),
                 ),
@@ -162,31 +150,6 @@ class LoginView extends StatelessWidget {
                 ),
               ]);
         },
-      ),
-    );
-  }
-
-  Container rowButton(BuildContext context, String path, String title) {
-    return Container(
-      color: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(mainAxisSize: MainAxisSize.min, children: [
-          SvgPicture.asset(
-            "assets/svg/$path.svg",
-            height: 40,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              title,
-              style: context.getTextTheme().bodyMedium!.copyWith(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 14),
-            ),
-          )
-        ]),
       ),
     );
   }

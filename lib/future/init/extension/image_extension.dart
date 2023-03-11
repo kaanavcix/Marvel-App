@@ -8,11 +8,11 @@ extension SvgEnumExtension on SvgEnum {
     return "assets/svg/${this.name}.svg";
   }
 
-  SvgPicture svgPicture(Color color) {
+  SvgPicture svgPicture(Color color,double height,double width) {
     return SvgPicture.asset(
-      "assets/svg/${this.name}.svg",
-      height: 85,
-      width: 144,
+      "assets/svg/${name}.svg",
+      height: height,
+      width: width,
     );
   }
 }

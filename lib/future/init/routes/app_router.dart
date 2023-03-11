@@ -9,10 +9,14 @@ import 'package:marvelapp/view/onboarding/onboarding_view.dart';
 import '../../../view/categories/view/categories_view.dart';
 import '../../../view/main/view/main_view.dart';
 import '../../../view/more/view/more_view.dart';
+import '../../../view/onboarding/payment_view.dart';
+import '../../../view/onboarding/register_view.dart';
 
 @MaterialAutoRouter(              
   replaceInRouteName: 'Page,Route',              
-  routes: <AutoRoute>[              
+  routes: <AutoRoute>[        
+    AutoRoute(page: RegisterView,path: "/register"),
+    AutoRoute(page: PaymentView,path: "/payment")      ,
     AutoRoute(page: OnbordingPage, initial: false,
     path: "/"),  
     AutoRoute(page: LoginView,initial: true,path: "/login")      ,

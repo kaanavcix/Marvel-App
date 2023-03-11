@@ -14,3 +14,4 @@ class OnboardingState with _$OnboardingState {
 enum AppStateEnum{
 inital,loading,loaded,finished,complete,error
 }
+
