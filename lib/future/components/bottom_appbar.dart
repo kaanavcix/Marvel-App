@@ -17,10 +17,11 @@ class BottomAppBarMarvel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      height: 55,
+      height: 56,
       elevation: 0,
       color: Colors.black.withOpacity(0.8),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           iconButton(context, SvgEnum.home, "Home", index == 0, onTap),

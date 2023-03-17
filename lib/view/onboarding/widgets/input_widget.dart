@@ -9,6 +9,8 @@ class InputWidget extends StatelessWidget {
     this.hintText,
     this.isVisible,
     this.onTap,
+    this.isPayment,
+    this.widget,
     super.key,
   });
 
@@ -16,7 +18,9 @@ class InputWidget extends StatelessWidget {
   String? suffixText;
   String? hintText;
   bool? isVisible;
+  bool? isPayment;
   void Function()? onTap;
+  Widget? widget;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -31,7 +35,11 @@ class InputWidget extends StatelessWidget {
           suffixStyle: context.getTextTheme().bodyMedium!.copyWith(
               fontWeight: FontWeight.bold,
               color: Colors.black.withOpacity(0.7)),
-          suffix: suffixText == null ? null : GestureDetector(onTap:  onTap,child: Text(suffixText ?? "")),
+          suffix: isPayment ?? true
+              ? suffixText == null
+                  ? null
+                  : GestureDetector(onTap: onTap, child: Text(suffixText ?? ""))
+              : GestureDetector(onTap: onTap, child: widget),
           hintText: hintText,
           hintStyle: context.getTextTheme().titleMedium!.copyWith(
               fontWeight: FontWeight.bold,

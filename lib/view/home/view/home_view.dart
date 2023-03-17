@@ -7,22 +7,12 @@ import 'package:marvelapp/future/init/extension/mediaquery_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
 
 import '../../../future/init/extension/image_extension.dart';
+import '../../widgets/profile_stack.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
-  Container circleBorder(BuildContext context, double size, double opacity) {
-    return Container(
-      height: size,
-      width: size,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(
-              width: 0.5,
-              color: context.getPrimaryColor().withOpacity(opacity))),
-    );
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,25 +23,10 @@ class HomeView extends StatelessWidget {
         toolbarHeight: 55,
         title: SvgPicture.asset(
           "assets/svg/logo.svg",
-          height: 55,
+          height: 44,
         ),
         actions: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              circleBorder(context, 70, 0.1),
-              circleBorder(context, 67, 0.2),
-              circleBorder(context, 64, 0.4),
-              circleBorder(context, 61, 0.6),
-              circleBorder(context, 59, 0.8),
-              circleBorder(context, 56, 1),
-              const CircleAvatar(
-                foregroundImage: AssetImage("assets/images/ellipse15.png"),
-                radius: 26.5,
-                backgroundColor: Colors.black,
-              )
-            ],
-          )
+          ProfileStack()
         ],
       ),
       body: SingleChildScrollView(

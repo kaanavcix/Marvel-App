@@ -8,7 +8,9 @@ import 'package:marvelapp/view/onboarding/onboarding_view.dart';
 
 import '../../../view/categories/view/categories_view.dart';
 import '../../../view/main/view/main_view.dart';
+import '../../../view/more/view/account_view.dart';
 import '../../../view/more/view/more_view.dart';
+import '../../../view/more/view/settings_view.dart';
 import '../../../view/onboarding/payment_view.dart';
 import '../../../view/onboarding/register_view.dart';
 
@@ -26,7 +28,9 @@ import '../../../view/onboarding/register_view.dart';
     AutoRoute(page: CategoriesView,path: "/categories",
      ),AutoRoute(page: MovieDetailView,path:"/movieDetail")  ,
      AutoRoute(page:DownloadedView,path: "/downloaded"),
-     AutoRoute(page: MoreView,path: "/more")    
+     AutoRoute(page: MoreView,path: "/more")    ,
+     AutoRoute(page: SettingsView, path: "/settings"),
+     AutoRoute(page:AccountView, path: "/account") ,
    
   ],              
 )              

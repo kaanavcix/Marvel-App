@@ -14,7 +14,7 @@ class RegisterState with _$RegisterState {
   
 }
 
-enum RegisterEnum { initial, loaded, completed, error, pin, payment }
+enum RegisterEnum { initial, loading, completed, error, pin, payment }
 
  // const factory RegisterState.laoded({required RegisterEnum state,    required bool isShow,bool? isLoading}) = _Loaded;
  // const factory RegisterState.completed({required RegisterEnum state,String? token}) =

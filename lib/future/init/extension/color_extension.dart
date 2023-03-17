@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension ColorExtension on BuildContext {
-  Color getPrimaryColor() {
+  Color  getPrimaryColor   () {
     return Theme.of(this).primaryColor;
   }
 

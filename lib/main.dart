@@ -27,7 +27,15 @@ class MarvelApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
-        BlocProvider(create: (context) => RegisterCubit(),
+        BlocProvider(create: (context) => RegisterCubit(
+          creditNumberController: TextEditingController(),
+          cvvController: TextEditingController(),
+          dateController: TextEditingController(),
+          emailController: TextEditingController(),
+          nameController: TextEditingController(),
+          surnameController: TextEditingController(),
+        
+        ),
         lazy: true,)
       ],
       child:  MaterialApp.router(

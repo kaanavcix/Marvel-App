@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' show Color;
 import 'package:flutter_svg/flutter_svg.dart';
 
-enum SvgEnum { google, facebook, logo,home,categories,downloads,more }
+enum SvgEnum { google, facebook, logo,home,categories,downloads,more,arrowRight }
 
 extension SvgEnumExtension on SvgEnum {
   String pathTo() {

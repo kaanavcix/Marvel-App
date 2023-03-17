@@ -9,6 +9,9 @@ import 'package:marvelapp/view/onboarding/cubit/register_cubit.dart';
 import 'package:marvelapp/view/onboarding/data/payment_data.dart';
 import 'package:marvelapp/view/onboarding/model/payment_model.dart';
 import 'package:marvelapp/view/onboarding/widgets/marvel_button.dart';
+import 'package:pinput/pinput.dart';
+
+import 'widgets/input_widget.dart';
 
 class PaymentView extends StatelessWidget {
   const PaymentView({super.key});
@@ -41,9 +44,10 @@ class PaymentView extends StatelessWidget {
           List<Widget> stepsScreen = [
             firstStep(context, state),
             secondStep(context, state),
-            thirdStep(context, state)
+            thirdStep(context, state),
+            fourStep(context, state)
           ];
-          return stepsScreen[state.pins!.last - 1];
+          return stepsScreen[state.index! - 1];
         },
       )),
     );
@@ -70,12 +74,40 @@ class PaymentView extends StatelessWidget {
         ),
         SvgEnum.logo.svgPicture(Colors.white, 67, 150),
         textBar(context, "Choose how to pay"),
-        paymentCardBar(state, context, () {},
+        paymentCardBar(
+            state,
+            context,
+            () => context
+                .read<RegisterCubit>()
+                .selectedOkey(PaymentData.paymentModel[3]),
             model: PaymentData.paymentModel[3]),
-        paymentCardBar(state, context, () {},
+        paymentCardBar(
+            state,
+            context,
+            () => context
+                .read<RegisterCubit>()
+                .selectedOkey(PaymentData.paymentModel[4]),
             model: PaymentData.paymentModel[4]),
-        Text(
-            "${context.read<RegisterCubit>().payment.payment_name}  ${context.read<RegisterCubit>().payment.payment_price} ")
+        changeLine(context)
+      ],
+    );
+  }
+
+  Row changeLine(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+              "${context.read<RegisterCubit>().payment[0].payment_name}  ${context.read<RegisterCubit>().payment[0].payment_price} /Month",
+              style: context.getTextTheme().labelLarge),
+        ),
+        Text("  Change",
+            style: context
+                .getTextTheme()
+                .labelLarge!
+                .copyWith(color: context.getPrimaryColor())),
       ],
     );
   }
@@ -109,14 +141,96 @@ class PaymentView extends StatelessWidget {
   }
 
   Widget thirdStep(BuildContext context, RegisterState state) {
+    const edgeInsets = EdgeInsets.symmetric(horizontal: 15.0, vertical: 8);
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            SvgEnum.logo.svgPicture(Colors.white, 67, 150),
+            textBar(context, "Fill your Credit / Debit \nCard Details"),
+            Padding(
+              padding: edgeInsets,
+              child: InputWidget(hintText: "Name"),
+            ),
+            Padding(
+              padding: edgeInsets,
+              child: InputWidget(hintText: "Surname"),
+            ),
+            Padding(
+              padding: edgeInsets,
+              child: InputWidget(
+                hintText: "Card Number",
+                isPayment: true,
+                widget: Icon(Icons.credit_card, color: Colors.black),
+              ),
+            ),
+            Padding(
+              padding: edgeInsets,
+              child: InputWidget(hintText: "Date"),
+            ),
+            Padding(
+              padding: edgeInsets,
+              child: InputWidget(hintText: "CVV"),
+            ),
+            changeLine(context)
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget fourStep(BuildContext context, RegisterState state) {
+    final defaultPinTheme = PinTheme(
+      margin: EdgeInsets.symmetric(horizontal: 4),
+      width: 40,
+      height: 50,
+      textStyle: TextStyle(
+          fontSize: 18.3, color: Colors.white, fontWeight: FontWeight.w600),
+      decoration: BoxDecoration(
+        color: Color(0xfffffff).withOpacity(0.2),
+        borderRadius: BorderRadius.circular(9),
+      ),
+    );
+
+    var data =
+        """ Please enter the OTP that we’ve sent on your phone number 55XXXXXX99 linked with your bank account.""";
     return Column(
-      children: [],
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        SvgEnum.logo.svgPicture(Colors.white, 67, 150),
+        textBar(context, "Enter Your OTP"),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(data),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Pinput(
+            onCompleted: (pin) {
+              context.read<RegisterCubit>().completeControl(pin);
+            },
+            androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsRetrieverApi,
+            defaultPinTheme: defaultPinTheme,
+          ),
+        ),
+        Text("Didn’t receve the OTP?",
+            style: context
+                .getTextTheme()
+                .titleSmall!
+                .copyWith(color: context.getPrimaryColor()))
+      ],
     );
   }
 
   Widget firstStep(BuildContext context, RegisterState state) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(
           height: 20,
