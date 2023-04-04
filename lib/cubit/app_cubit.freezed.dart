@@ -19,39 +19,33 @@ mixin _$AppState {
   AppStateEnum? get state => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AppStateEnum? state) initial,
-    required TResult Function(AppStateEnum? state) finaled,
+    required TResult Function(AppStateEnum? state) state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AppStateEnum? state)? initial,
-    TResult? Function(AppStateEnum? state)? finaled,
+    TResult? Function(AppStateEnum? state)? state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AppStateEnum? state)? initial,
-    TResult Function(AppStateEnum? state)? finaled,
+    TResult Function(AppStateEnum? state)? state,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Finaled value) finaled,
+    required TResult Function(_State value) state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Finaled value)? finaled,
+    TResult? Function(_State value)? state,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Finaled value)? finaled,
+    TResult Function(_State value)? state,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -94,20 +88,19 @@ class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory _$$_InitialCopyWith(
-          _$_Initial value, $Res Function(_$_Initial) then) =
-      __$$_InitialCopyWithImpl<$Res>;
+abstract class _$$_StateCopyWith<$Res> implements $AppStateCopyWith<$Res> {
+  factory _$$_StateCopyWith(_$_State value, $Res Function(_$_State) then) =
+      __$$_StateCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({AppStateEnum? state});
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res, _$_Initial>
-    implements _$$_InitialCopyWith<$Res> {
-  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+class __$$_StateCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_State>
+    implements _$$_StateCopyWith<$Res> {
+  __$$_StateCopyWithImpl(_$_State _value, $Res Function(_$_State) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +108,7 @@ class __$$_InitialCopyWithImpl<$Res>
   $Res call({
     Object? state = freezed,
   }) {
-    return _then(_$_Initial(
+    return _then(_$_State(
       freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
@@ -126,22 +119,30 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial(this.state);
+class _$_State with DiagnosticableTreeMixin implements _State {
+  const _$_State(this.state);
 
   @override
   final AppStateEnum? state;
 
   @override
-  String toString() {
-    return 'AppState.initial(state: $state)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AppState.state(state: $state)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AppState.state'))
+      ..add(DiagnosticsProperty('state', state));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Initial &&
+            other is _$_State &&
             (identical(other.state, state) || other.state == state));
   }
 
@@ -151,36 +152,33 @@ class _$_Initial implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
+  _$$_StateCopyWith<_$_State> get copyWith =>
+      __$$_StateCopyWithImpl<_$_State>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(AppStateEnum? state) initial,
-    required TResult Function(AppStateEnum? state) finaled,
+    required TResult Function(AppStateEnum? state) state,
   }) {
-    return initial(state);
+    return state(this.state);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AppStateEnum? state)? initial,
-    TResult? Function(AppStateEnum? state)? finaled,
+    TResult? Function(AppStateEnum? state)? state,
   }) {
-    return initial?.call(state);
+    return state?.call(this.state);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AppStateEnum? state)? initial,
-    TResult Function(AppStateEnum? state)? finaled,
+    TResult Function(AppStateEnum? state)? state,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(state);
+    if (state != null) {
+      return state(this.state);
     }
     return orElse();
   }
@@ -188,177 +186,39 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Finaled value) finaled,
+    required TResult Function(_State value) state,
   }) {
-    return initial(this);
+    return state(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Finaled value)? finaled,
+    TResult? Function(_State value)? state,
   }) {
-    return initial?.call(this);
+    return state?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Finaled value)? finaled,
+    TResult Function(_State value)? state,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (state != null) {
+      return state(this);
     }
     return orElse();
   }
 }
 
-abstract class _Initial implements AppState {
-  const factory _Initial(final AppStateEnum? state) = _$_Initial;
+abstract class _State implements AppState {
+  const factory _State(final AppStateEnum? state) = _$_State;
 
   @override
   AppStateEnum? get state;
   @override
   @JsonKey(ignore: true)
-  _$$_InitialCopyWith<_$_Initial> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_FinaledCopyWith<$Res> implements $AppStateCopyWith<$Res> {
-  factory _$$_FinaledCopyWith(
-          _$_Finaled value, $Res Function(_$_Finaled) then) =
-      __$$_FinaledCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({AppStateEnum? state});
-}
-
-/// @nodoc
-class __$$_FinaledCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res, _$_Finaled>
-    implements _$$_FinaledCopyWith<$Res> {
-  __$$_FinaledCopyWithImpl(_$_Finaled _value, $Res Function(_$_Finaled) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? state = freezed,
-  }) {
-    return _then(_$_Finaled(
-      freezed == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as AppStateEnum?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Finaled implements _Finaled {
-  const _$_Finaled(this.state);
-
-  @override
-  final AppStateEnum? state;
-
-  @override
-  String toString() {
-    return 'AppState.finaled(state: $state)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Finaled &&
-            (identical(other.state, state) || other.state == state));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, state);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FinaledCopyWith<_$_Finaled> get copyWith =>
-      __$$_FinaledCopyWithImpl<_$_Finaled>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(AppStateEnum? state) initial,
-    required TResult Function(AppStateEnum? state) finaled,
-  }) {
-    return finaled(state);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(AppStateEnum? state)? initial,
-    TResult? Function(AppStateEnum? state)? finaled,
-  }) {
-    return finaled?.call(state);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(AppStateEnum? state)? initial,
-    TResult Function(AppStateEnum? state)? finaled,
-    required TResult orElse(),
-  }) {
-    if (finaled != null) {
-      return finaled(state);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Finaled value) finaled,
-  }) {
-    return finaled(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Finaled value)? finaled,
-  }) {
-    return finaled?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Finaled value)? finaled,
-    required TResult orElse(),
-  }) {
-    if (finaled != null) {
-      return finaled(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Finaled implements AppState {
-  const factory _Finaled(final AppStateEnum? state) = _$_Finaled;
-
-  @override
-  AppStateEnum? get state;
-  @override
-  @JsonKey(ignore: true)
-  _$$_FinaledCopyWith<_$_Finaled> get copyWith =>
+  _$$_StateCopyWith<_$_State> get copyWith =>
       throw _privateConstructorUsedError;
 }

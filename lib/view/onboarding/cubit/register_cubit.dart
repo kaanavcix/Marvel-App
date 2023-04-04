@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:marvelapp/future/service/model/user_model.dart';
 import 'package:marvelapp/view/onboarding/model/payment_model.dart';
 
 part 'register_state.dart';
@@ -14,31 +15,45 @@ class RegisterCubit extends Cubit<RegisterState> {
       required this.dateController,
       required this.creditNumberController,
       required this.emailController,
+      required this.passwordController,
       required this.surnameController})
-      : super(const RegisterState.initial(
+      : super(RegisterState.initial(
             state: RegisterEnum.initial,
             isShow: false,
             isValid: false,
-            isLoading: false));
-
-  List<int> steps = [1];
-  List<PaymentModel> payment = [PaymentModel()];
-  void changeVisiblity() => emit(state.copyWith(isShow: state.isShow!));
+            isLoading: false,
+            userModel: UserModel())) {
+    print("Register cubit is working");
+  }
 
   TextEditingController emailController;
+  TextEditingController passwordController;
   TextEditingController nameController;
   TextEditingController surnameController;
   TextEditingController creditNumberController;
   TextEditingController dateController;
   TextEditingController cvvController;
-
-  Future<void> registerControl() async {
-    Future.delayed(const Duration(seconds: 1));
-    emit(state.copyWith(
-        state: RegisterEnum.payment, isWhich: null, pins: steps, index: 1));
+  bool isVisible = false;
+  UserModel userModel = UserModel(
+    uid: null,
+  );
+  List<int> steps = [1];
+  List<PaymentModel> payment = [PaymentModel()];
+  void changeVisibility() {
+    isVisible = !isVisible;
+    emit(state.copyWith(isShow: isVisible));
   }
 
-  void selectedOkey(PaymentModel model) {
+  Future<void> registerControl() async {
+    emit(state.copyWith(
+      state: RegisterEnum.payment,
+      isWhich: null,
+      pins: steps,
+      index: 1,
+    ));
+  }
+
+  void isSelected(PaymentModel model) {
     payment[0].payment_id == null ? payment.removeAt(0) : null;
     payment.add(model);
     emit(state.copyWith(
@@ -47,16 +62,40 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void contiuneButton() {
-    steps.add(steps.last + 1);
-
-    print(state.index);
-    print(steps);
+    if (steps.last != 4) {
+      steps.add(steps.last + 1);
+    }
 
     if (payment[0].payment_id == null) {}
 
     if (state.index == 4) {
-       changeLoading();
-      emit(state.copyWith(state: RegisterEnum.completed));
+      print(
+          nameController.text + emailController.text + passwordController.text);
+      changeLoading();
+      emit(state.copyWith(
+          state: RegisterEnum.completed,
+          userModel: userModel.copyWith(
+              imagePath: "/",
+              name: nameController.text,
+              phoneNumber: "not need to",
+              email: emailController.text,
+              password: passwordController.text,
+              userName: "${nameController.text} ${surnameController.text}",
+              whichPackage:
+                  "${payment[0].payment_name} ${payment[0].payment_price}")));
+
+      if (state.state == RegisterEnum.completed) {
+        nameController.clear();
+        surnameController.clear();
+        cvvController.clear();
+        creditNumberController.clear();
+        dateController.clear();
+        isVisible = false;
+        emailController.clear();
+        passwordController.clear();
+        payment.removeRange(1, payment.length - 1);
+        
+      }
     }
 
     if (steps.last == 3) {
@@ -75,9 +114,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   Future<void> completeControl(String pin) async {
     if (pin.length == 4) {
       changeLoading();
-      emit(state.copyWith(
-        state: RegisterEnum.completed,
-      ));
     }
   }
 }

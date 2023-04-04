@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:marvelapp/cubit/app_cubit.dart';
 import 'package:marvelapp/future/init/extension/color_extension.dart';
 import 'package:marvelapp/future/init/extension/mediaquery_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
 import 'package:marvelapp/view/home/view/home_view.dart';
 import 'package:marvelapp/view/main/view/main_view.dart';
 import 'package:marvelapp/view/onboarding/cubit/login_cubit.dart';
+import 'package:marvelapp/view/onboarding/register_view.dart';
 import 'package:marvelapp/view/onboarding/widgets/input_widget.dart';
-
-
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -22,15 +22,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<LoginCubit, LoginState>(
-        listener: (context, state) {
-          if (state.state == LoginStateEnum.completed) {
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainView(),),(route) => false,);
-
-            context.router.replaceNamed("/main");
-          }
-
-          
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Column(
               mainAxisSize: MainAxisSize.min,
@@ -68,7 +60,10 @@ class LoginView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: GestureDetector(
-                    onTap: () => context.read<LoginCubit>().loginControl(),
+                    onTap: () {
+                      context.read<LoginCubit>().loginControl();
+                      context.read<AppCubit>().login();
+                    },
                     child: Container(
                       height: 50,
                       width: context.getWidth(),
@@ -99,7 +94,7 @@ class LoginView extends StatelessWidget {
                       )),
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Align(
@@ -111,7 +106,7 @@ class LoginView extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Align(
@@ -137,7 +132,7 @@ class LoginView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Row(
@@ -151,12 +146,15 @@ class LoginView extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w900),
                     ),
-                    Text(
-                      " Sign in",
-                      style: context.getTextTheme().titleLarge!.copyWith(
-                          color: context.getPrimaryColor(),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w900),
+                    GestureDetector(
+                      onTap: () => context.router.pushWidget(RegisterView()),
+                      child: Text(
+                        " Sign in",
+                        style: context.getTextTheme().titleLarge!.copyWith(
+                            color: context.getPrimaryColor(),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w900),
+                      ),
                     ),
                   ],
                 ),

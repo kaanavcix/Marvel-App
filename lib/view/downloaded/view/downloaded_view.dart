@@ -50,16 +50,16 @@ class _DownloadedViewState extends State<DownloadedView> {
                       onTap1: () =>
                           context.read<DownloadedCubit>().changeIndex(1),
                       text: "Downloads",
-                      text1: "Watchlist");
+                      text1: "Readlist");
                 },
               )),
         ),
         body: BlocBuilder<DownloadedCubit, DownloadedState>(
             builder: (context, state) {
           return RefreshIndicator(
-              onRefresh: () async => await context.read<DownloadedCubit>().fetchData(),
-              child: 
-                state.status.when(
+              onRefresh: () async =>
+                  await context.read<DownloadedCubit>().fetchData(),
+              child: state.status.when(
                 inital: () {
                   return Center(
                     child: Text("İnitial"),
@@ -73,14 +73,16 @@ class _DownloadedViewState extends State<DownloadedView> {
                 completed: (iscompleted) {
                   return downloadedCard(context);
                 },
-              
               ));
         }));
   }
+
 //TODO: ŞUNA BAKARIZ Bİ
   Padding downloadedCard(BuildContext context) {
+    const edgeInsets =  EdgeInsets.all(8.0);
+    const edgeInsets2 =  EdgeInsets.symmetric(horizontal: 10);
     return Padding(
-      padding: const EdgeInsets.all(8.0) + EdgeInsets.symmetric(horizontal: 10),
+      padding: edgeInsets + edgeInsets2,
       child: Container(
         width: context.getWidth(),
         height: 130,

@@ -14,15 +14,13 @@ import '../../../view/more/view/settings_view.dart';
 import '../../../view/onboarding/payment_view.dart';
 import '../../../view/onboarding/register_view.dart';
 
-@MaterialAutoRouter(              
-  replaceInRouteName: 'Page,Route',              
+@AdaptiveAutoRouter(              
   routes: <AutoRoute>[        
-    AutoRoute(page: RegisterView,path: "/register"),
+    AutoRoute(page: RegisterView,path: "/register",initial:true),
     AutoRoute(page: PaymentView,path: "/payment")      ,
-    AutoRoute(page: OnbordingPage, initial: false,
-    path: "/"),  
-    AutoRoute(page: LoginView,initial: true,path: "/login")      ,
-    AutoRoute(page: MainView,path: "/main"),
+   AutoRoute(page: OnboardingView ,path: "/"),
+    AutoRoute(page: LoginView,path: "/login",initial:true)      ,
+    AutoRoute(page: MainView,),
         AutoRoute(page: HomeView,path: "/home"),
 
     AutoRoute(page: CategoriesView,path: "/categories",

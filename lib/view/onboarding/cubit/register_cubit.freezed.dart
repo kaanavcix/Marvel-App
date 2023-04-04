@@ -20,27 +20,49 @@ mixin _$RegisterState {
   bool? get isValid => throw _privateConstructorUsedError;
   bool? get isShow => throw _privateConstructorUsedError;
   bool? get isLoading => throw _privateConstructorUsedError;
+  UserModel? get userModel => throw _privateConstructorUsedError;
   int? get index => throw _privateConstructorUsedError;
   List<int>? get pins => throw _privateConstructorUsedError;
   int? get isWhich => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)
+    required TResult Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)?
+    TResult? Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)?
+    TResult Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)?
         initial,
     required TResult orElse(),
   }) =>
@@ -78,6 +100,7 @@ abstract class $RegisterStateCopyWith<$Res> {
       bool? isValid,
       bool? isShow,
       bool? isLoading,
+      UserModel? userModel,
       int? index,
       List<int>? pins,
       int? isWhich});
@@ -100,6 +123,7 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? isValid = freezed,
     Object? isShow = freezed,
     Object? isLoading = freezed,
+    Object? userModel = freezed,
     Object? index = freezed,
     Object? pins = freezed,
     Object? isWhich = freezed,
@@ -121,6 +145,10 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       index: freezed == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -150,6 +178,7 @@ abstract class _$$_InitialCopyWith<$Res>
       bool? isValid,
       bool? isShow,
       bool? isLoading,
+      UserModel? userModel,
       int? index,
       List<int>? pins,
       int? isWhich});
@@ -169,6 +198,7 @@ class __$$_InitialCopyWithImpl<$Res>
     Object? isValid = freezed,
     Object? isShow = freezed,
     Object? isLoading = freezed,
+    Object? userModel = freezed,
     Object? index = freezed,
     Object? pins = freezed,
     Object? isWhich = freezed,
@@ -190,6 +220,10 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool?,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       index: freezed == index
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -214,6 +248,7 @@ class _$_Initial implements _Initial {
       required this.isValid,
       required this.isShow,
       required this.isLoading,
+      this.userModel,
       this.index,
       final List<int>? pins,
       this.isWhich})
@@ -227,6 +262,8 @@ class _$_Initial implements _Initial {
   final bool? isShow;
   @override
   final bool? isLoading;
+  @override
+  final UserModel? userModel;
   @override
   final int? index;
   final List<int>? _pins;
@@ -244,7 +281,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'RegisterState.initial(state: $state, isValid: $isValid, isShow: $isShow, isLoading: $isLoading, index: $index, pins: $pins, isWhich: $isWhich)';
+    return 'RegisterState.initial(state: $state, isValid: $isValid, isShow: $isShow, isLoading: $isLoading, userModel: $userModel, index: $index, pins: $pins, isWhich: $isWhich)';
   }
 
   @override
@@ -257,14 +294,24 @@ class _$_Initial implements _Initial {
             (identical(other.isShow, isShow) || other.isShow == isShow) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            (identical(other.userModel, userModel) ||
+                other.userModel == userModel) &&
             (identical(other.index, index) || other.index == index) &&
             const DeepCollectionEquality().equals(other._pins, _pins) &&
             (identical(other.isWhich, isWhich) || other.isWhich == isWhich));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, state, isValid, isShow,
-      isLoading, index, const DeepCollectionEquality().hash(_pins), isWhich);
+  int get hashCode => Object.hash(
+      runtimeType,
+      state,
+      isValid,
+      isShow,
+      isLoading,
+      userModel,
+      index,
+      const DeepCollectionEquality().hash(_pins),
+      isWhich);
 
   @JsonKey(ignore: true)
   @override
@@ -275,34 +322,57 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)
+    required TResult Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)
         initial,
   }) {
-    return initial(state, isValid, isShow, isLoading, index, pins, isWhich);
+    return initial(
+        state, isValid, isShow, isLoading, userModel, index, pins, isWhich);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)?
+    TResult? Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)?
         initial,
   }) {
     return initial?.call(
-        state, isValid, isShow, isLoading, index, pins, isWhich);
+        state, isValid, isShow, isLoading, userModel, index, pins, isWhich);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RegisterEnum state, bool? isValid, bool? isShow,
-            bool? isLoading, int? index, List<int>? pins, int? isWhich)?
+    TResult Function(
+            RegisterEnum state,
+            bool? isValid,
+            bool? isShow,
+            bool? isLoading,
+            UserModel? userModel,
+            int? index,
+            List<int>? pins,
+            int? isWhich)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(state, isValid, isShow, isLoading, index, pins, isWhich);
+      return initial(
+          state, isValid, isShow, isLoading, userModel, index, pins, isWhich);
     }
     return orElse();
   }
@@ -342,6 +412,7 @@ abstract class _Initial implements RegisterState {
       required final bool? isValid,
       required final bool? isShow,
       required final bool? isLoading,
+      final UserModel? userModel,
       final int? index,
       final List<int>? pins,
       final int? isWhich}) = _$_Initial;
@@ -354,6 +425,8 @@ abstract class _Initial implements RegisterState {
   bool? get isShow;
   @override
   bool? get isLoading;
+  @override
+  UserModel? get userModel;
   @override
   int? get index;
   @override

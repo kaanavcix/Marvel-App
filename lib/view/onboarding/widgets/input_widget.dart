@@ -55,3 +55,29 @@ class InputWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+class TextBar extends StatelessWidget {
+  const TextBar({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Text(text,
+          style: context
+              .getTextTheme()
+              .headlineSmall!
+              .copyWith(fontWeight: FontWeight.w900, fontSize: 24)),
+    );
+  }
+}
+
+
+//TODO: TextBar widget maybe later we can change folder location

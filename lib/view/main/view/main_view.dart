@@ -1,9 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:marvelapp/cubit/home_cubit.dart';
+
+import 'package:marvelapp/future/global/dio_instance.dart';
 import 'package:marvelapp/future/init/extension/image_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
+import 'package:marvelapp/future/service/bussines/series_service.dart';
+import 'package:marvelapp/future/service/firebase/database_repository.dart';
+import 'package:marvelapp/future/service/firebase/database_service.dart';
 import 'package:marvelapp/view/categories/cubit/categories_cubit.dart';
 import 'package:marvelapp/view/categories/view/categories_view.dart';
 import 'package:marvelapp/view/downloaded/cubit/downloaded_cubit.dart';
@@ -13,7 +19,9 @@ import 'package:marvelapp/view/more/cubit/more_cubit.dart';
 import 'package:marvelapp/view/more/view/more_view.dart';
 
 import '../../../future/components/bottom_appbar.dart';
+import '../../../future/service/bussines/comics_service.dart';
 import '../../downloaded/view/downloaded_view.dart';
+import '../../home/cubit/home_cubit.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -30,13 +38,19 @@ class MainView extends StatelessWidget {
           create: (context) => CategoriesCubit(),
         ),
         BlocProvider(
-          create: (context) => MoreCubit(),
+          create: (context) => MoreCubit(
+              databaseRepository: DatabaseRepository(
+                  databaseService: DatabaseService(
+                      auth: FirebaseAuth.instance,
+                      fireStore: FirebaseFirestore.instance))),
         ),
         BlocProvider(
           create: (context) => DownloadedCubit(),
         ),
         BlocProvider(
-          create: (context) => HomeCubit(),
+          create: (context) => HomeCubit(
+              comicsService: ComicsService(DioInstance.instance.dio),
+              seriesService: SeriesService(DioInstance.instance.dio)),
         ) //RepositoryProvider(create: create)
       ],
       child: MainPage(),
@@ -44,14 +58,27 @@ class MainView extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+List<Widget> screens = [
+  HomeView(),
+  CategoriesView(),
+  DownloadedView(),
+  MoreView()
+];
+
+class MainPage extends StatefulWidget {
   MainPage({super.key});
-  List<Widget> screens = [
-    HomeView(),
-    CategoriesView(),
-    DownloadedView(),
-    MoreView()
-  ];
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().fetchData();
+    context.read<MoreCubit>().fetchCurrentUserData();
+  }
 
   @override
   Widget build(BuildContext context) {

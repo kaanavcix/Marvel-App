@@ -17,20 +17,21 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$OnboardingState {
   int get selectedIndex => throw _privateConstructorUsedError;
-  AppStateEnum get state => throw _privateConstructorUsedError;
+  OnboardingStateEnum get state => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int selectedIndex, AppStateEnum state) initial,
+    required TResult Function(int selectedIndex, OnboardingStateEnum state)
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int selectedIndex, AppStateEnum state)? initial,
+    TResult? Function(int selectedIndex, OnboardingStateEnum state)? initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int selectedIndex, AppStateEnum state)? initial,
+    TResult Function(int selectedIndex, OnboardingStateEnum state)? initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +63,7 @@ abstract class $OnboardingStateCopyWith<$Res> {
           OnboardingState value, $Res Function(OnboardingState) then) =
       _$OnboardingStateCopyWithImpl<$Res, OnboardingState>;
   @useResult
-  $Res call({int selectedIndex, AppStateEnum state});
+  $Res call({int selectedIndex, OnboardingStateEnum state});
 }
 
 /// @nodoc
@@ -89,7 +90,7 @@ class _$OnboardingStateCopyWithImpl<$Res, $Val extends OnboardingState>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as AppStateEnum,
+              as OnboardingStateEnum,
     ) as $Val);
   }
 }
@@ -102,7 +103,7 @@ abstract class _$$_InitialCopyWith<$Res>
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedIndex, AppStateEnum state});
+  $Res call({int selectedIndex, OnboardingStateEnum state});
 }
 
 /// @nodoc
@@ -126,7 +127,7 @@ class __$$_InitialCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as AppStateEnum,
+              as OnboardingStateEnum,
     ));
   }
 }
@@ -139,7 +140,7 @@ class _$_Initial implements _Initial {
   @override
   final int selectedIndex;
   @override
-  final AppStateEnum state;
+  final OnboardingStateEnum state;
 
   @override
   String toString() {
@@ -168,7 +169,8 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int selectedIndex, AppStateEnum state) initial,
+    required TResult Function(int selectedIndex, OnboardingStateEnum state)
+        initial,
   }) {
     return initial(selectedIndex, state);
   }
@@ -176,7 +178,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int selectedIndex, AppStateEnum state)? initial,
+    TResult? Function(int selectedIndex, OnboardingStateEnum state)? initial,
   }) {
     return initial?.call(selectedIndex, state);
   }
@@ -184,7 +186,7 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int selectedIndex, AppStateEnum state)? initial,
+    TResult Function(int selectedIndex, OnboardingStateEnum state)? initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -224,12 +226,12 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements OnboardingState {
   const factory _Initial(final int selectedIndex,
-      {required final AppStateEnum state}) = _$_Initial;
+      {required final OnboardingStateEnum state}) = _$_Initial;
 
   @override
   int get selectedIndex;
   @override
-  AppStateEnum get state;
+  OnboardingStateEnum get state;
   @override
   @JsonKey(ignore: true)
   _$$_InitialCopyWith<_$_Initial> get copyWith =>

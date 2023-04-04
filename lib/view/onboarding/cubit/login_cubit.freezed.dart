@@ -17,24 +17,27 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   LoginStateEnum get state => throw _privateConstructorUsedError;
+  UserModel? get userModel => throw _privateConstructorUsedError;
   bool? get isValidate => throw _privateConstructorUsedError;
   bool? get isVisible => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            LoginStateEnum state, bool? isValidate, bool? isVisible)
+    required TResult Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(LoginStateEnum state, bool? isValidate, bool? isVisible)?
+    TResult? Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)?
         initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(LoginStateEnum state, bool? isValidate, bool? isVisible)?
+    TResult Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)?
         initial,
     required TResult orElse(),
   }) =>
@@ -67,7 +70,11 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({LoginStateEnum state, bool? isValidate, bool? isVisible});
+  $Res call(
+      {LoginStateEnum state,
+      UserModel? userModel,
+      bool? isValidate,
+      bool? isVisible});
 }
 
 /// @nodoc
@@ -84,6 +91,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? state = null,
+    Object? userModel = freezed,
     Object? isValidate = freezed,
     Object? isVisible = freezed,
   }) {
@@ -92,6 +100,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as LoginStateEnum,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       isValidate: freezed == isValidate
           ? _value.isValidate
           : isValidate // ignore: cast_nullable_to_non_nullable
@@ -111,7 +123,11 @@ abstract class _$$_InitialCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
       __$$_InitialCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoginStateEnum state, bool? isValidate, bool? isVisible});
+  $Res call(
+      {LoginStateEnum state,
+      UserModel? userModel,
+      bool? isValidate,
+      bool? isVisible});
 }
 
 /// @nodoc
@@ -125,6 +141,7 @@ class __$$_InitialCopyWithImpl<$Res>
   @override
   $Res call({
     Object? state = null,
+    Object? userModel = freezed,
     Object? isValidate = freezed,
     Object? isVisible = freezed,
   }) {
@@ -133,6 +150,10 @@ class __$$_InitialCopyWithImpl<$Res>
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as LoginStateEnum,
+      userModel: freezed == userModel
+          ? _value.userModel
+          : userModel // ignore: cast_nullable_to_non_nullable
+              as UserModel?,
       isValidate: freezed == isValidate
           ? _value.isValidate
           : isValidate // ignore: cast_nullable_to_non_nullable
@@ -148,10 +169,13 @@ class __$$_InitialCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial({required this.state, this.isValidate, this.isVisible});
+  const _$_Initial(
+      {required this.state, this.userModel, this.isValidate, this.isVisible});
 
   @override
   final LoginStateEnum state;
+  @override
+  final UserModel? userModel;
   @override
   final bool? isValidate;
   @override
@@ -159,7 +183,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'LoginState.initial(state: $state, isValidate: $isValidate, isVisible: $isVisible)';
+    return 'LoginState.initial(state: $state, userModel: $userModel, isValidate: $isValidate, isVisible: $isVisible)';
   }
 
   @override
@@ -168,6 +192,8 @@ class _$_Initial implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$_Initial &&
             (identical(other.state, state) || other.state == state) &&
+            (identical(other.userModel, userModel) ||
+                other.userModel == userModel) &&
             (identical(other.isValidate, isValidate) ||
                 other.isValidate == isValidate) &&
             (identical(other.isVisible, isVisible) ||
@@ -175,7 +201,8 @@ class _$_Initial implements _Initial {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, state, isValidate, isVisible);
+  int get hashCode =>
+      Object.hash(runtimeType, state, userModel, isValidate, isVisible);
 
   @JsonKey(ignore: true)
   @override
@@ -186,31 +213,33 @@ class _$_Initial implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            LoginStateEnum state, bool? isValidate, bool? isVisible)
+    required TResult Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)
         initial,
   }) {
-    return initial(state, isValidate, isVisible);
+    return initial(state, userModel, isValidate, isVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(LoginStateEnum state, bool? isValidate, bool? isVisible)?
+    TResult? Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)?
         initial,
   }) {
-    return initial?.call(state, isValidate, isVisible);
+    return initial?.call(state, userModel, isValidate, isVisible);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(LoginStateEnum state, bool? isValidate, bool? isVisible)?
+    TResult Function(LoginStateEnum state, UserModel? userModel,
+            bool? isValidate, bool? isVisible)?
         initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(state, isValidate, isVisible);
+      return initial(state, userModel, isValidate, isVisible);
     }
     return orElse();
   }
@@ -247,11 +276,14 @@ class _$_Initial implements _Initial {
 abstract class _Initial implements LoginState {
   const factory _Initial(
       {required final LoginStateEnum state,
+      final UserModel? userModel,
       final bool? isValidate,
       final bool? isVisible}) = _$_Initial;
 
   @override
   LoginStateEnum get state;
+  @override
+  UserModel? get userModel;
   @override
   bool? get isValidate;
   @override

@@ -3,8 +3,11 @@ import 'package:marvelapp/future/init/extension/color_extension.dart';
 import 'package:marvelapp/future/init/extension/mediaquery_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marvelapp/future/service/model/comics_model.dart';
+import 'package:marvelapp/future/service/model/series_model.dart';
 import 'package:marvelapp/view/categories/cubit/categories_cubit.dart';
 
+import '../../home/cubit/home_cubit.dart';
 import '../../widgets/toggle_buttons.dart';
 
 class CategoriesView extends StatelessWidget {
@@ -21,7 +24,7 @@ class CategoriesView extends StatelessWidget {
               builder: (context, state) {
             return MarvelToggleButtons(
               index: state.index,
-              text: "Movies",
+              text: "Comics",
               text1: "Series",
               onTap: () => context.read<CategoriesCubit>().changeIndex(0),
               onTap1: () => context.read<CategoriesCubit>().changeIndex(1),
@@ -30,7 +33,7 @@ class CategoriesView extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Expanded(
+           /*  Expanded(
               flex: 1,
               child: SizedBox(
                 height: 30,
@@ -45,19 +48,70 @@ class CategoriesView extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
-            Expanded(
-              flex: 19,
-              child: GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, crossAxisSpacing: 8, mainAxisSpacing: 8),
-                itemBuilder: (context, index) {
-                  return Container(
-                      height: 160, width: 102, color: Colors.green);
-                },
-                itemCount: 29,
-              ),
+            ), */
+            BlocBuilder<HomeCubit, HomeState>(
+              builder: (context, state) {
+                List<Resultss> seriesData = [];
+                List<String> comicsData = [];
+                state.state.whenOrNull(completed: (model, images, series) {
+                  comicsData = images;
+                  seriesData = series;
+                });
+                var index = context.watch<CategoriesCubit>().state.index;
+                print(index);
+                return index == 0
+                    ? Expanded(
+                        flex: 19,
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 8),
+                          itemBuilder: (context, index) {
+                          
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                image: DecorationImage(
+                                  image: NetworkImage(comicsData[index]),fit: BoxFit.cover
+                                ),
+                              ),
+                              height: 160,
+                              width: 102,
+                            );
+                          },
+                          itemCount: comicsData.length,
+                        ),
+                      )
+                    : Expanded(
+                        flex: 19,
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 8,
+                                  mainAxisSpacing: 8),
+                          itemBuilder: (context, index) {
+                            var url =
+                                "${seriesData[index].thumbnail!.path}.${seriesData[index].thumbnail!.extension}";
+
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.green,
+                                image: DecorationImage(
+                                  image: NetworkImage(url),
+                                ),
+                              ),
+                              height: 160,
+                              width: 102,
+                            );
+                          },
+                          itemCount: seriesData.length,
+                        ));
+              },
             )
           ],
         ),

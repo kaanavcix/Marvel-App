@@ -236,7 +236,9 @@ mixin _$HomeStatus {
     required TResult Function() initiall,
     required TResult Function(bool state) loading,
     required TResult Function(String message) error,
-    required TResult Function(dynamic model) completed,
+    required TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)
+        completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -244,7 +246,9 @@ mixin _$HomeStatus {
     TResult? Function()? initiall,
     TResult? Function(bool state)? loading,
     TResult? Function(String message)? error,
-    TResult? Function(dynamic model)? completed,
+    TResult? Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -252,7 +256,9 @@ mixin _$HomeStatus {
     TResult Function()? initiall,
     TResult Function(bool state)? loading,
     TResult Function(String message)? error,
-    TResult Function(dynamic model)? completed,
+    TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -342,7 +348,9 @@ class _$_Initiall implements _Initiall {
     required TResult Function() initiall,
     required TResult Function(bool state) loading,
     required TResult Function(String message) error,
-    required TResult Function(dynamic model) completed,
+    required TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)
+        completed,
   }) {
     return initiall();
   }
@@ -353,7 +361,9 @@ class _$_Initiall implements _Initiall {
     TResult? Function()? initiall,
     TResult? Function(bool state)? loading,
     TResult? Function(String message)? error,
-    TResult? Function(dynamic model)? completed,
+    TResult? Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
   }) {
     return initiall?.call();
   }
@@ -364,7 +374,9 @@ class _$_Initiall implements _Initiall {
     TResult Function()? initiall,
     TResult Function(bool state)? loading,
     TResult Function(String message)? error,
-    TResult Function(dynamic model)? completed,
+    TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
     required TResult orElse(),
   }) {
     if (initiall != null) {
@@ -481,7 +493,9 @@ class _$_Loading implements _Loading {
     required TResult Function() initiall,
     required TResult Function(bool state) loading,
     required TResult Function(String message) error,
-    required TResult Function(dynamic model) completed,
+    required TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)
+        completed,
   }) {
     return loading(state);
   }
@@ -492,7 +506,9 @@ class _$_Loading implements _Loading {
     TResult? Function()? initiall,
     TResult? Function(bool state)? loading,
     TResult? Function(String message)? error,
-    TResult? Function(dynamic model)? completed,
+    TResult? Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
   }) {
     return loading?.call(state);
   }
@@ -503,7 +519,9 @@ class _$_Loading implements _Loading {
     TResult Function()? initiall,
     TResult Function(bool state)? loading,
     TResult Function(String message)? error,
-    TResult Function(dynamic model)? completed,
+    TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -624,7 +642,9 @@ class _$_Error implements _Error {
     required TResult Function() initiall,
     required TResult Function(bool state) loading,
     required TResult Function(String message) error,
-    required TResult Function(dynamic model) completed,
+    required TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)
+        completed,
   }) {
     return error(message);
   }
@@ -635,7 +655,9 @@ class _$_Error implements _Error {
     TResult? Function()? initiall,
     TResult? Function(bool state)? loading,
     TResult? Function(String message)? error,
-    TResult? Function(dynamic model)? completed,
+    TResult? Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
   }) {
     return error?.call(message);
   }
@@ -646,7 +668,9 @@ class _$_Error implements _Error {
     TResult Function()? initiall,
     TResult Function(bool state)? loading,
     TResult Function(String message)? error,
-    TResult Function(dynamic model)? completed,
+    TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -708,7 +732,7 @@ abstract class _$$_CompletedCopyWith<$Res> {
           _$_Completed value, $Res Function(_$_Completed) then) =
       __$$_CompletedCopyWithImpl<$Res>;
   @useResult
-  $Res call({dynamic model});
+  $Res call({List<Results> model, List<String> images, List<Resultss> series});
 }
 
 /// @nodoc
@@ -722,13 +746,23 @@ class __$$_CompletedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? model = freezed,
+    Object? model = null,
+    Object? images = null,
+    Object? series = null,
   }) {
     return _then(_$_Completed(
-      model: freezed == model
-          ? _value.model
+      model: null == model
+          ? _value._model
           : model // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<Results>,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      series: null == series
+          ? _value._series
+          : series // ignore: cast_nullable_to_non_nullable
+              as List<Resultss>,
     ));
   }
 }
@@ -736,14 +770,41 @@ class __$$_CompletedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Completed implements _Completed {
-  const _$_Completed({required this.model});
+  const _$_Completed(
+      {required final List<Results> model,
+      required final List<String> images,
+      required final List<Resultss> series})
+      : _model = model,
+        _images = images,
+        _series = series;
 
+  final List<Results> _model;
   @override
-  final dynamic model;
+  List<Results> get model {
+    if (_model is EqualUnmodifiableListView) return _model;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_model);
+  }
+
+  final List<String> _images;
+  @override
+  List<String> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  final List<Resultss> _series;
+  @override
+  List<Resultss> get series {
+    if (_series is EqualUnmodifiableListView) return _series;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_series);
+  }
 
   @override
   String toString() {
-    return 'HomeStatus.completed(model: $model)';
+    return 'HomeStatus.completed(model: $model, images: $images, series: $series)';
   }
 
   @override
@@ -751,12 +812,17 @@ class _$_Completed implements _Completed {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Completed &&
-            const DeepCollectionEquality().equals(other.model, model));
+            const DeepCollectionEquality().equals(other._model, _model) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other._series, _series));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(model));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_model),
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_series));
 
   @JsonKey(ignore: true)
   @override
@@ -770,9 +836,11 @@ class _$_Completed implements _Completed {
     required TResult Function() initiall,
     required TResult Function(bool state) loading,
     required TResult Function(String message) error,
-    required TResult Function(dynamic model) completed,
+    required TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)
+        completed,
   }) {
-    return completed(model);
+    return completed(model, images, series);
   }
 
   @override
@@ -781,9 +849,11 @@ class _$_Completed implements _Completed {
     TResult? Function()? initiall,
     TResult? Function(bool state)? loading,
     TResult? Function(String message)? error,
-    TResult? Function(dynamic model)? completed,
+    TResult? Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
   }) {
-    return completed?.call(model);
+    return completed?.call(model, images, series);
   }
 
   @override
@@ -792,11 +862,13 @@ class _$_Completed implements _Completed {
     TResult Function()? initiall,
     TResult Function(bool state)? loading,
     TResult Function(String message)? error,
-    TResult Function(dynamic model)? completed,
+    TResult Function(
+            List<Results> model, List<String> images, List<Resultss> series)?
+        completed,
     required TResult orElse(),
   }) {
     if (completed != null) {
-      return completed(model);
+      return completed(model, images, series);
     }
     return orElse();
   }
@@ -840,9 +912,14 @@ class _$_Completed implements _Completed {
 }
 
 abstract class _Completed implements HomeStatus {
-  const factory _Completed({required final dynamic model}) = _$_Completed;
+  const factory _Completed(
+      {required final List<Results> model,
+      required final List<String> images,
+      required final List<Resultss> series}) = _$_Completed;
 
-  dynamic get model;
+  List<Results> get model;
+  List<String> get images;
+  List<Resultss> get series;
   @JsonKey(ignore: true)
   _$$_CompletedCopyWith<_$_Completed> get copyWith =>
       throw _privateConstructorUsedError;

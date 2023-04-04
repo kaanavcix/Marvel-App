@@ -8,7 +8,7 @@ part 'onboarding_cubit.freezed.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
   OnboardingCubit(this.pageController)
-      : super(const OnboardingState.initial(0, state: AppStateEnum.inital));
+      : super(const OnboardingState.initial(0, state: OnboardingStateEnum.inital));
 
   PageController pageController;
 

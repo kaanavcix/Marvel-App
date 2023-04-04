@@ -6,6 +6,7 @@ import 'package:marvelapp/future/init/extension/color_extension.dart';
 import 'package:marvelapp/future/init/extension/mediaquery_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:marvelapp/future/init/routes/app_router.gr.dart';
 import 'package:marvelapp/view/onboarding/cubit/onboarding_cubit.dart';
 
 import 'widgets/dot_indicator.dart';
@@ -140,7 +141,7 @@ class OnboardingView extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () => context.router.pushNamed("/login"),
+                            onTap: () => context.router.push(const LoginViewRoute()),
                             child: Container(
                               height: 50,
                               width: context.getWidth(),

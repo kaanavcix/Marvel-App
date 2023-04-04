@@ -2,16 +2,7 @@ part of 'app_cubit.dart';
 
 @freezed
 class AppState with _$AppState {
-  const factory AppState.initial(AppStateEnum? state) = _Initial;
-  const factory AppState.finaled( AppStateEnum? state)  = _Finaled;
+  const factory AppState.state(AppStateEnum? state) = _State;
 }
 
-
-
-
-
-enum AppStateEnum{
-inital,loading,loaded,finished,complete,error
-}
-
-
+enum AppStateEnum { inital, signIn, login }

@@ -6,12 +6,12 @@ class OnboardingState with _$OnboardingState {
   
   {
    
-    required AppStateEnum state
+    required OnboardingStateEnum state
   }  ) = _Initial;
 }
 
 
-enum AppStateEnum{
+enum OnboardingStateEnum{
 inital,loading,loaded,finished,complete,error
 }
 

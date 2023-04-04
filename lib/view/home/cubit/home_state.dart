@@ -10,5 +10,7 @@ class HomeStatus with _$HomeStatus {
   const factory HomeStatus.initiall() = _Initiall;
   const factory HomeStatus.loading({required bool state}) = _Loading;
   const factory HomeStatus.error({required String message}) = _Error;
-  const factory HomeStatus.completed({required dynamic model}) = _Completed;
+  const factory HomeStatus.completed(
+      {required List<Results> model,
+      required List<String> images,  required List<Resultss> series}) = _Completed;
 }

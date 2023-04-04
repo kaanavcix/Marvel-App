@@ -7,11 +7,10 @@ class RegisterState with _$RegisterState {
       required bool? isValid,
       required bool? isShow,
       required bool? isLoading,
-       int? index,
-      List<int>? pins, 
-
+      UserModel? userModel,
+      int? index,
+      List<int>? pins,
       int? isWhich}) = _Initial;
-  
 }
 
 enum RegisterEnum { initial, loading, completed, error, pin, payment }
@@ -25,3 +24,6 @@ enum RegisterEnum { initial, loading, completed, error, pin, payment }
    ///   {required bool isSelected,required RegisterEnum state,
       //required List<int> pins,
       //String? priceName}) = _Payment;
+
+
+      // * Simple status structure 

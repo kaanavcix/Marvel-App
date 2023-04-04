@@ -1,51 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:marvelapp/future/init/theme/dark_theme.dart';
-import 'package:marvelapp/view/main/cubit/main_cubit.dart';
-import 'package:marvelapp/view/onboarding/cubit/login_cubit.dart';
-import 'package:marvelapp/view/onboarding/cubit/onboarding_cubit.dart';
-import 'package:marvelapp/view/onboarding/cubit/register_cubit.dart';
-import 'package:marvelapp/view/onboarding/login_view.dart';
-import 'package:marvelapp/view/onboarding/onboarding_view.dart';
+import 'package:marvelapp/cubit/app_cubit.dart';
+
+import 'package:marvelapp/future/service/firebase/auth_repository.dart';
+import 'package:marvelapp/future/service/firebase/auth_service.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marvelapp/view/onboarding/onboarding_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'firebase_options.dart';
+import 'future/service/firebase/database_service.dart';
+import 'marvel_app.dart';
 
-import 'future/init/routes/app_router.gr.dart';
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-void main() => runApp(MarvelApp());
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
 
-class MarvelApp extends StatelessWidget {
-  MarvelApp({super.key});
-  final _appRouter = AppRouter();
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => OnboardingCubit(PageController()),
-        ),
-        BlocProvider(
-          create: (context) => LoginCubit(),
-        ),
-        BlocProvider(create: (context) => RegisterCubit(
-          creditNumberController: TextEditingController(),
-          cvvController: TextEditingController(),
-          dateController: TextEditingController(),
-          emailController: TextEditingController(),
-          nameController: TextEditingController(),
-          surnameController: TextEditingController(),
-        
-        ),
-        lazy: true,)
-      ],
-      child:  MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      darkTheme: darkTheme,
-      title: "Marvel",
-      themeMode: ThemeMode.dark,
-      debugShowCheckedModeBanner: false,
-    ),
-    );
-  }
+  runApp(BlocProvider(
+    lazy: false,
+    create: (context) => AppCubit(
+      authRepository: AuthRepository(
+          databaseService: DatabaseService(
+              auth: FirebaseAuth.instance,
+              fireStore: FirebaseFirestore.instance),
+          authService: AuthService(firebaseAuth: FirebaseAuth.instance)),
+      sharedPreferences: sharedPreferences,
+    )..getBool(),
+    child: MarvelApp(),
+  ));
 }

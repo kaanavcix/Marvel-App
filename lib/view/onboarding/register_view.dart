@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marvelapp/future/init/extension/color_extension.dart';
-import 'package:marvelapp/future/init/extension/mediaquery_extension.dart';
 import 'package:marvelapp/future/init/extension/text_extension.dart';
-import 'package:marvelapp/view/home/view/home_view.dart';
-import 'package:marvelapp/view/main/view/main_view.dart';
-import 'package:marvelapp/view/onboarding/cubit/login_cubit.dart';
 import 'package:marvelapp/view/onboarding/cubit/register_cubit.dart';
+import 'package:marvelapp/view/onboarding/payment_view.dart';
 import 'package:marvelapp/view/onboarding/widgets/input_widget.dart';
 
 import 'widgets/marvel_button.dart';
@@ -19,16 +16,12 @@ class RegisterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var emailController = context.read<LoginCubit>().emailController;
-    var passwordController = context.read<LoginCubit>().passwordController;
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: BlocConsumer<RegisterCubit, RegisterState>(
         listener: (context, state) {
-          if (state.state == RegisterEnum.completed) {
-            // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MainView(),),(route) => false,);
-            context.router.replaceNamed("/main");
-          }
+         
         },
         builder: (context, state) {
           const edgeInsets = EdgeInsets.symmetric(vertical: 8.0);
@@ -53,26 +46,26 @@ class RegisterView extends StatelessWidget {
                 Padding(
                   padding: edgeInsets + edgeInsets2,
                   child: InputWidget(
-                    textEditingController: emailController,
+                    textEditingController: context.watch<RegisterCubit>().emailController ,
                     hintText: "Enter your Email ID",
                   ),
                 ),
                 Padding(
                     padding: edgeInsets,
                     child: InputWidget(
-                      textEditingController: passwordController,
+                      textEditingController: context.watch<RegisterCubit>().passwordController ,
                       hintText: "Password",
                       suffixText: (state.isShow) ?? false ? "Side" : "Show",
-                      isVisible: state.isShow,
+                      isVisible: state.isShow ,
                       onTap: () =>
-                          context.read<RegisterCubit>().changeVisiblity(),
+                          context.read<RegisterCubit>().changeVisibility(),
                     )),
                 MarvelButton(
                   state,
                     text: "Signup",
                     onTap: () {
                       context.read<RegisterCubit>().registerControl();
-                      context.router.pushNamed("/payment");
+                      context.router.pushWidget(PaymentView());
                     }),
                 Padding(
                   padding: edgeInsets3,
@@ -99,7 +92,7 @@ class RegisterView extends StatelessWidget {
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     )),
-                SizedBox(
+              const  SizedBox(
                   height: 20,
                 ),
                 Align(
