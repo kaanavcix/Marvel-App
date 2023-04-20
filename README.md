@@ -2,6 +2,10 @@
  
 
 
+https://user-images.githubusercontent.com/79256195/233241367-2c9c33b0-a819-4632-82c5-8c58a59000cd.mp4
+
+
+
 ## Introduction
 
 Hello friends, I decided to have to enough time for developing new apps. That's why I found a design and marvel api source. Actually, I am so bored from using a getx state managment and I wanted to try new technologies and state managements. I prefered to use Flutter bloc and Freezed package. Generally, I couldn't found turkish source relating to freezed and flutter bloc packages.
